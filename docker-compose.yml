@@ -1,12 +1,6 @@
-version: "3.3"
-#CONTAINER INFO
-httpd:
-    container_name: httpd-Duong
-    image: "httpd:lasted"
-    hostname: localhost
-    restart: always #Luon khoi dong
-    network:
-    - default
-    port:
-    - "8080:80"
-
+version: '3'  
+services:
+  web:
+    image: nginx:latest
+    ports:
+     - "8080:80"   
