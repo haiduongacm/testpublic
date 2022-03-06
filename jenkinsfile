@@ -1,10 +1,20 @@
-stage("DOCKER PUSH") {
-    environment {
-        DOCKER_USERNAME = cradentials("haiduongmilan")
-        DOCKER_PASSWORD = cradentials("Kenko@123")
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stages ("DOCKER PUSH") {
+            environment {
+            DOCKER_USERNAME = cradentials("haiduongmilan")
+            DOCKER_PASSWORD = cradentials("Kenko@123")
      }
-     steps {
-     sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
-     sh "docker push haiduongmilan/abc"
+        steps {
+            sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
+            sh "docker push haiduongmilan/abc"
      }
+        }
+    }
 }
