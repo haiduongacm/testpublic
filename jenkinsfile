@@ -2,10 +2,12 @@ pipeline {
 	agent any
 	
 	stages {
-		stage('Hello') {
+		stage('Run docker-compose') {
 			steps {
-				echo 'Hello World'
-				}
+				sh cd /home/ec2-user/workspace/docker-01
+				sh docker-compose down
+				sh docker-compose up -d
+			      }
 			}
 		}
 	}
