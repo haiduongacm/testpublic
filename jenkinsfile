@@ -1,20 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Example') {
             steps {
-                echo 'Building..'
+                sh "sudo ssh -i DevOpspem.pem ec2-user@18.139.0.248"
+                echo "SSH Thanh cong"
             }
-        }
-        stages ("DOCKER PUSH") {
-            environment {
-            DOCKER_USERNAME = cradentials("haiduongmilan")
-            DOCKER_PASSWORD = cradentials("Kenko@123")
-     }
-        steps {
-            sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
-            sh "docker push haiduongmilan/abc"
-     }
         }
     }
 }
