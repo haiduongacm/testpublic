@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                sh "sudo ssh -i DevOpspem.pem ec2-user@18.139.0.248"
+                sh "sudo ssh -i /home/ec2-user/pushdockerhub/DevOpspem.pem ec2-user@18.139.0.248"
                 echo "SSH Thanh cong"
             }
         }
