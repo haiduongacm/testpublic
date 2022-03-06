@@ -4,7 +4,7 @@ stage("Docker push") {
         DOCKER_PASSWORD = credentials("Kenko@123")
      }
      steps {
-        sh "docker login --username ${DOCKER_USERNAME} --password ${DPKCER_PASSWORD}"
+        sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}"
         sh "docker push haiduongmilan/test"
       }
 }
