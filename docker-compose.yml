@@ -4,5 +4,5 @@ services:
     image: nginx:latest
     ports:
      - "8080:80"
-    restart: always
-CMD ["nginx", "-g", "daemon off;"]    
+
+
