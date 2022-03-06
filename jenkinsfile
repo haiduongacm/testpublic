@@ -4,10 +4,7 @@ pipeline {
 	stages {
 		stage('Run docker-compose') {
 			steps {
-				ssh -i "DevOps.pem" ec2-user@ec2-18-139-0-248.ap-southeast-1.compute.amazonaws.com
-				cd /home/ec2-user/workspace/docker-01
-				docker-compose down
-				docker-compose up -d
+				echo "Hello"
 			      }
 			}
 		}
