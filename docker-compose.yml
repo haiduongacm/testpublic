@@ -1,2 +1,14 @@
-FROM nginx
-EXPOSE 80
+FROM httpd:latest
+
+# Cập nhật và cài đặt vim, htop
+
+RUN apt-get update -y \
+    && apt-get install vim -y \
+    && apt-get install htop \
+    && rm -rf /var/lib/apt/lists/*
+
+# Mở cổng 80, 443 trên network container nối vào
+
+EXPOSE 80 443
+
+CMD [ "httpd-foreground"]
