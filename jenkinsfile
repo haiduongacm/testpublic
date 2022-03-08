@@ -6,8 +6,9 @@ pipeline {
             steps {
                 sshagent(credentials:['docker-01']){
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 uptime "whoami"'
+               sh 'docker build -t testbuid .'
                   }
-                echo 'Building..'
+                echo 'Buid OK'
             }
         }
         stage('Test') {
@@ -20,5 +21,10 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('Push') {
+            steps {
+                echo 'Deploying....'
+            }
+        }    
     }
 }
