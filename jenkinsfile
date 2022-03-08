@@ -11,25 +11,28 @@ pipeline {
     stages {
         stage("Build") {            
             steps {
-                sh "echo ok"
+                
             }
         }
 
         stage("Unit test") {
             steps {
-                sh "echo Unit test ok"
+                
             }
         }
 
         stage("Code coverage") {
             steps {
-                sh "echo Code coverage ok"
+               
             }
         }
 
-        stage('SonarQube analysis') {            
+        stage('SonarQube analysis') {
+            environment {
+                SCANNER_HOME = tool 'sonarqube-scanner'
+            }
             steps {
-                 sh "echo SonarQube analysis ok"
+               
                 }
             }
         }
@@ -53,7 +56,8 @@ pipeline {
         
         stage('Docker deploy with ansible'){
             steps{
-                sh "echo ok"
+                
+                
             }
         }
     }
