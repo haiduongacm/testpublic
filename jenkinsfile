@@ -9,12 +9,13 @@ pipeline {
                sshagent(credentials:['docker-01']){
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 uptime "whoami" '
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'
-	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild/test:v1 .'
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild/test:v1 .'	       
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 echo $DOCKERHUB_CREDENTIALS_PSW'
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker push testbuild/test:v'
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker logout'
                   }
-                echo 'SSH OK'
-	        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        sh 'docker push testbuild/test:v'
-	        sh 'docker logout'
+                echo 'OK'	        
             }
         }
       
