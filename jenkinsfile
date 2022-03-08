@@ -13,7 +13,7 @@ pipeline {
                   }
                 echo 'Buid OK'
 		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        sh 'docker push testbuild:firsttry'
+	        sh 'docker push testbuild'
 	        sh 'docker logout'
             }
         }
