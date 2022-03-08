@@ -8,8 +8,7 @@ pipeline {
             steps {
                sshagent(credentials:['docker-01']){
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 uptime "whoami" '
-               sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'
-               #sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild .'	       
+               sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'                      
                   }
                 echo 'SSH OK'
 		
