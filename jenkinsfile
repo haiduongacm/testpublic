@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+           environment {
+		       DOCKERHUB_CREDENTIALS=credentials('todockerhub')
+	       }
     stages {
         stage('Build') {
             steps {
@@ -24,7 +26,9 @@ pipeline {
         }
         stage('Push') {
             steps {
-                echo 'Deploying....'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker push haiduongmilan/abc:latest'
+                sh 'docker logout'
             }
         }    
     }
