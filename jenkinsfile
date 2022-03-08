@@ -17,13 +17,13 @@ pipeline {
         stage('BUILD') {
             agent {
                 docker {
-                    image 'gradle:6.7-jdk11'                    
+                    image 'nginx'                    
                     reuseNode true
                 }
             }	    
 	    steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        sh 'docker push gradle:6.7-jdk11'
+	        sh 'docker push nginx'
 	        sh 'docker logout'
             }
         }
