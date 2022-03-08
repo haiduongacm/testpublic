@@ -26,7 +26,7 @@ pipeline {
         }
 	stage('PUSH NOTI') {
             steps {
-                echo 'OK...'
+                echo 'OK....'
             }
         }     
     }
