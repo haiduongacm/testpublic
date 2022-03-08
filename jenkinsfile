@@ -8,25 +8,14 @@ pipeline {
             steps {
                sshagent(credentials:['docker-01']){
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 uptime "whoami" '
-               sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'                      
+               sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t Testbuild/Test:v1 .'
                   }
                 echo 'SSH OK'
 		
             }
         }
-        stage('BUILD') {
-            agent {
-                docker {
-                    image 'nginx'                    
-                    reuseNode true
-                }
-            }	    
-	    steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        sh 'docker push nginx'
-	        sh 'docker logout'
-            }
-        }
+      
         stage('TEST') {
             steps {
                 echo 'OK...'
