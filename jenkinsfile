@@ -21,12 +21,12 @@ pipeline {
       
         stage('TEST') {
             steps {
-                echo 'OK....'
+                echo 'OK.....'
             }
         }
 	stage('PUSH NOTI') {
             steps {
-                echo 'OK....'
+                echo 'OK.....'
             }
         }     
     }
