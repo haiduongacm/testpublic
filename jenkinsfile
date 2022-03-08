@@ -4,16 +4,17 @@ pipeline {
 		       DOCKERHUB_CREDENTIALS=credentials('todockerhub')
 	       }
     stages {
-        stage('THU SSH') {
+        stage('BUILD & PUSH') {
             steps {
                sshagent(credentials:['docker-01']){
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 uptime "whoami" '
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'
 	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild/test:v1 .'
                   }
-                echo 'SSH OK'
+               echo 'SSH OK'
 	       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 	       sh 'docker push testbuild/test:v'
+	       sh 'docker logout'
             }
         }
       
