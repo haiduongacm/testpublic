@@ -12,7 +12,8 @@ pipeline {
 	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild/test:v1 .'
                   }
                 echo 'SSH OK'
-		
+	       sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	       sh 'docker push testbuild/test:v'
             }
         }
       
