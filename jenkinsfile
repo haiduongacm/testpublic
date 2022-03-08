@@ -13,7 +13,7 @@ pipeline {
 	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
 	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker push haiduongmilan/testbuild:v1'
 	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker logout'
-	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker rm haiduongmilan/testbuild:v1 '
+	       sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker image rm haiduongmilan/testbuild:v1 '
                   }
                 echo 'OK'	        
             }
