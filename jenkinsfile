@@ -4,28 +4,39 @@ pipeline {
 		       DOCKERHUB_CREDENTIALS=credentials('todockerhub')
 	       }
     stages {
-        stage('Build & Push') {
+        stage('THU SSH') {
             steps {
                sshagent(credentials:['docker-01']){
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 uptime "whoami" '
                sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 cd /'
-               sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild .'	       
+               #sh 'ssh  -o StrictHostKeyChecking=no  ec2-user@18.139.0.248 docker build -t testbuild .'	       
                   }
-                echo 'Buid OK'
-		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-	        sh 'docker push testbuild'
+                echo 'SSH OK'
+		
+            }
+        }
+        stage('BUILD') {
+            agent {
+                docker {
+                    image 'gradle:6.7-jdk11'                    
+                    reuseNode true
+                }
+            }	    
+	    steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	        sh 'docker push gradle:6.7-jdk11'
 	        sh 'docker logout'
             }
         }
-        stage('Test') {
+        stage('TEST') {
             steps {
-                echo 'Testing..'
+                echo 'OK...'
             }
         }
-        stage('Deploy') {
+	stage('PUSH NOTI') {
             steps {
-                echo 'Deploying...'
+                echo 'OK...'
             }
-        }        
+        }     
     }
 }
