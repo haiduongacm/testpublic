@@ -4,8 +4,8 @@ pipeline {
         DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"        
         DOCKER_IMAGE="nginxbyDuong"
 	    DOCKER_REGISTRY="13.229.250.134"
-        DOCKER_USERNAME = credentials("docker-user")
-        DOCKER_PASSWORD = credentials("docker-password")
+        DOCKER_USERNAME = credentials("admin")
+        DOCKER_PASSWORD = credentials("admin")
 	DOCKERHUB_CREDENTIALS=credentials('todockerhub')
     }
         stages {        
@@ -19,7 +19,7 @@ pipeline {
         }
 	stage('PUSH') {
             steps {
-               sh "docker login ${DOCKER_REGISTRY}"
+               sh "docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD} ${DOCKER_REGISTRY}"
                 sh "docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
                 sh "docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest"
                 sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
