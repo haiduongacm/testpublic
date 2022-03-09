@@ -3,7 +3,7 @@ pipeline {
     environment {
         DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"        
         DOCKER_IMAGE="nginxbyduong"
-	DOCKER_REGISTRY="13.229.250.134"
+	DOCKER_REGISTRY="13.229.250.134:5000"
         DOCKER_USERNAME = "admin"
         DOCKER_PASSWORD = "admin"
 	DOCKERHUB_CREDENTIALS=credentials('todockerhub')
